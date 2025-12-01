@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="mb-0">სტატისტიკა</h3>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-secondary" (click)="goBack()">
+            უკან დაბრუნება
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div *ngIf="loading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">იტვირთება...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!loading" class="table-responsive">
+        <table class="table table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">კინოთეატრი</th>
+              <th scope="col" class="text-end">პროდუქტების რაოდენობა</th>
+              <th scope="col" class="text-end">ჯამური ღირებულება (₾)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of statistics">
+              <td>{{ stat.name }}</td>
+              <td class="text-end">{{ stat.totalProducts || 0 }}</td>
+              <td class="text-end">₾{{ (stat.totalPrice || 0).toFixed(2) }}</td>
+            </tr>
+          </tbody>
+          <tfoot class="table-secondary">
+            <tr>
+              <th>სულ:</th>
+              <th class="text-end">{{ totalProducts }}</th>
+              <th class="text-end">₾{{ totalValue.toFixed(2) }}</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

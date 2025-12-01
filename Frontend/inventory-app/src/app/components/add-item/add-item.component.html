@@ -1,0 +1,86 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="mb-0">ახალი ნივთის დამატება</h3>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="location" class="form-label">
+                ადგილმდებარეობა: <span class="text-danger">*</span>
+              </label>
+              <select 
+                id="location"
+                class="form-select"
+                [class.is-invalid]="errors.location"
+                [(ngModel)]="locationId"
+                name="locationId">
+                <option [value]="null">აირჩიეთ ადგილმდებარეობა</option>
+                <option *ngFor="let loc of locations" [value]="loc.id">
+                  {{ loc.name }}
+                </option>
+              </select>
+              <div *ngIf="errors.location" class="invalid-feedback d-block">
+                {{ errors.location }}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">
+                სახელი: <span class="text-danger">*</span>
+              </label>
+              <input 
+                type="text"
+                id="name"
+                class="form-control"
+                [class.is-invalid]="errors.name"
+                [(ngModel)]="name"
+                name="name"
+                placeholder="შეიყვანეთ ნივთის სახელი">
+              <div *ngIf="errors.name" class="invalid-feedback d-block">
+                {{ errors.name }}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="price" class="form-label">
+                ფასი (₾): <span class="text-danger">*</span>
+              </label>
+              <input 
+                type="number"
+                id="price"
+                step="0.01"
+                class="form-control"
+                [class.is-invalid]="errors.price"
+                [(ngModel)]="price"
+                name="price"
+                placeholder="0.00">
+              <div *ngIf="errors.price" class="invalid-feedback d-block">
+                {{ errors.price }}
+              </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button 
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                დამატება
+              </button>
+              <button 
+                type="button"
+                class="btn btn-secondary"
+                (click)="onCancel()"
+                [disabled]="loading">
+                გაუქმება
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
